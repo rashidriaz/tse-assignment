@@ -117,7 +117,7 @@ public class FareCalculator {
         for (Province province : provinces) {
             for (String city : province.getCities()) {
                 if (!city.equals(departCombo.getSelectedItem())) {
-                    departCombo.addItem(city);
+                    arrCombo.addItem(city);
                 }
             }
         }

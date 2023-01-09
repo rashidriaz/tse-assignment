@@ -10,6 +10,7 @@ public class Province {
 
     public Province(String name) {
         this.name = name;
+        this.cities = new HashSet<String>();
     }
 
     public Province(String name, Set<String> cities) {
