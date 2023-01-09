@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 public class FareCalculator {
 
     private final JPanel panel;
-
+    private final Province[] provinces;
     private final JComboBox<String> departCombo;
 
 
@@ -43,6 +43,18 @@ public class FareCalculator {
     }
 
     public FareCalculator() {
+        provinces = new Province[2];
+        provinces[0] = new Province("Punjab");
+        provinces[0].addCity("Lahore");
+        provinces[0].addCity("Multan");
+        provinces[0].addCity("Faisalabad");
+        provinces[0].addCity("Sialkot");
+        provinces[1] = new Province("Khayber Pakhtunkhwa");
+        provinces[1].addCity("Peshawar");
+        provinces[1].addCity("Kohat");
+        provinces[1].addCity("Mardan");
+        provinces[1].addCity("Swabi");
+        provinces[1].addCity("Dera Islmail Khan");
 
         JFrame frame = new JFrame("Fare Calculator");
         frame.setLayout(new GridLayout(0, 1));
@@ -87,9 +99,11 @@ public class FareCalculator {
 
         JLabel departLabel = new JLabel("Departure City: ");
         departCombo = new JComboBox<>();
-        departCombo.addItem("Lahore");
-        departCombo.addItem("Peshawar");
-
+        for (Province province : provinces) {
+            for (String city : province.getCities()) {
+                departCombo.addItem(city);
+            }
+        }
         JLabel aClass = new JLabel("Class");
         economy = new JCheckBox("Economy");
         AC = new JCheckBox("AC");
@@ -100,9 +114,13 @@ public class FareCalculator {
 
         JLabel arrLabel = new JLabel("Arrival City: ");
         arrCombo = new JComboBox<>();
-        arrCombo.addItem("Islamabad");
-        arrCombo.addItem("Gujranwala");
-        arrCombo.addItem("Faisalabad");
+        for (Province province : provinces) {
+            for (String city : province.getCities()) {
+                if (!city.equals(departCombo.getSelectedItem())) {
+                    departCombo.addItem(city);
+                }
+            }
+        }
 
         JLabel seatLabel = new JLabel("Total Seats");
         seatText = new JTextField("");
